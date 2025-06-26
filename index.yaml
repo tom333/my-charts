@@ -1,0 +1,24 @@
+apiVersion: v1
+entries:
+  datalab:
+  - apiVersion: v2
+    created: "2025-06-25T04:52:23.004297832Z"
+    dependencies:
+    - name: mlflow
+      repository: https://community-charts.github.io/helm-charts
+      version: 1.2.0
+    - name: minio
+      repository: https://charts.min.io/
+      version: 5.4.0
+    - name: mariadb
+      repository: https://groundhog2k.github.io/helm-charts/
+      version: 4.4.0
+    - name: zenml
+      repository: oci://public.ecr.aws/zenml
+      version: 0.83.1
+    digest: 447ad74b85f3258bf718bb2c59450e2ac89accc6ee3dd39a4125f0b9cecbaacc
+    name: datalab
+    urls:
+    - https://github.com/tom333/my-charts/releases/download/datalab-1.0.0/datalab-1.0.0.tgz
+    version: 1.0.0
+generated: "2025-06-25T04:52:23.004308132Z"
