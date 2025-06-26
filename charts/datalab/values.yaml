@@ -87,6 +87,7 @@ zenml:
     tls:
       enabled: true
       secretName: zenml-tls-certs
+      generateCerts: false
   deploymentType: local
   debug: false
   analyticsOptIn: false          
