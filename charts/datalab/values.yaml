@@ -69,13 +69,13 @@ mariadb:
   settings:
     rootPassword:
       value: password
-    userDatabase: 
-      name: 
-        value: zenml
-      user:
-        value: zenml
-      password:
-        value: zenml
+  userDatabase: 
+    name: 
+      value: zenml
+    user:
+      value: zenml
+    password:
+      value: zenml
 zenml:
   zenml:
     database:
