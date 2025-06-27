@@ -82,14 +82,11 @@ zenml:
   ingress:
     enabled: true
     annotations:
-      cert-manager.io/cluster-issuer: "letsencrypt-prod"        
+      cert-manager.io/cluster-issuer: "letsencrypt-prod"
     host: zenml.tgu.ovh
     tls:
       enabled: true
       secretName: zenml-tls-certs
-  deploymentType: local
-  debug: false
-  analyticsOptIn: false          
 mysql:
   auth:
     user: "zenml"
