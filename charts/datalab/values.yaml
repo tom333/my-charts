@@ -77,20 +77,14 @@ mariadb:
       password:
         value: zenml
 zenml:
-  database:
-    url: "mysql://zenml:zenml@lab-mariadb.datalab.svc.cluster.local:3306/zenml"
-  ingress:
-    enabled: true
-    annotations:
-      cert-manager.io/cluster-issuer: "letsencrypt-prod"
-    host: zenml.tgu.ovh
-    tls:
+  zenml:
+    database:
+      url: "mysql://zenml:zenml@lab-mariadb.datalab.svc.cluster.local:3306/zenml"
+    ingress:
       enabled: true
-      secretName: zenml-tls-certs
-mysql:
-  auth:
-    user: "zenml"
-    rootPassword: "zenml"
-    password: "zenml"
-    replicationPassword: "zenml"
-    database: "zenml"
+      annotations:
+        cert-manager.io/cluster-issuer: "letsencrypt-prod"
+      host: zenml.tgu.ovh
+      tls:
+        enabled: true
+        secretName: zenml-tls-certs
