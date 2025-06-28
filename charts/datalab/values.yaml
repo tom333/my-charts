@@ -28,6 +28,11 @@ minio:
           - minio-console.tgu.ovh
   environment:
     MINIO_BROWSER_REDIRECT_URL: https://minio-console.tgu.ovh
+
+  users:
+    - accessKey: externalSecret
+      existingSecret: minio-auth-secret
+     
 mlflow: 
   strategy:
     type: Recreate
