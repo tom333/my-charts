@@ -92,15 +92,3 @@ zenml:
       tls:
         enabled: true
         secretName: zenml-tls-certs
-
-yatai:
-  ingress:
-    enabled: true
-    annotations:
-      cert-manager.io/cluster-issuer: "letsencrypt-prod"
-    hosts:
-      - yatai.tgu.ovh
-    tls:
-      - secretName: zenml-tls-certs
-        hosts:  
-          - yatai.tgu.ovh
