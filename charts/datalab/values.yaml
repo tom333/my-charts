@@ -80,6 +80,10 @@ mariadb:
       value: zenml
     password:
       value: zenml
+  livenessProbe:
+    enabled: false
+  startupProbe:
+    enabled: false
 zenml:
   zenml:
     database:
