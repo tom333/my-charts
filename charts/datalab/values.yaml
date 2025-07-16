@@ -42,6 +42,10 @@ mlflow:
       cert-manager.io/cluster-issuer: "letsencrypt-prod"
       nginx.ingress.kubernetes.io/proxy-body-size: 512m
     tls: true
+  postgresql:
+    auth:
+      password: bn_mlflow
+      postgresPassword: bn_mlflow
   minio:
     enabled: false
   externalS3:
@@ -81,7 +85,7 @@ mysql:
 zenml:
   zenml:
     database:
-      url: "mysql://zenml:zenml@mysql-zenml.datalab.svc.cluster.local:3306/zenml"
+      url: "mysql://zenml:zenml@lab-mysql-zenml.ia-lab.svc.cluster.local:3306/zenml"
     ingress:
       enabled: true
       annotations:
