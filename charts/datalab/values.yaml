@@ -85,7 +85,7 @@ mysql:
 zenml:
   zenml:
     database:
-      url: "mysql://zenml:zenml@lab-mysql-zenml.ia-lab.svc.cluster.local:3306/zenml"
+      url: "mysql://zenml:zenml@lab-mysql.ia-lab.svc.cluster.local:3306/zenml"
     ingress:
       enabled: true
       annotations:
