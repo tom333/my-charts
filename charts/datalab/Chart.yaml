@@ -1,16 +1,16 @@
 apiVersion: v2
 name: datalab
-version: 1.0.12
+version: 1.0.13
 dependencies:
   - name: mlflow
-    version: 1.3.0
-    repository: https://community-charts.github.io/helm-charts
+    version: 5.1.3
+    repository: https://charts.bitnami.com/bitnami
   - name: minio
     version: 5.4.0
     repository: https://charts.min.io/
-  - name: mariadb
-    version: 4.4.0
-    repository: https://groundhog2k.github.io/helm-charts/
+  - name: mysql
+    version: 13.0.3
+    repository: https://charts.bitnami.com/bitnami
   - name: zenml
     version: 0.83.1
     repository: oci://public.ecr.aws/zenml
