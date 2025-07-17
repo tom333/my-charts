@@ -42,7 +42,8 @@ mlflow:
         cert-manager.io/cluster-issuer: "letsencrypt-prod"
         nginx.ingress.kubernetes.io/proxy-body-size: 512m
       tls: true
-    service: ClusterIP
+    service: 
+      type: ClusterIP
   postgresql:
     auth:
       password: bn_mlflow
