@@ -33,15 +33,15 @@ minio:
   
 mlflow: 
   tracking:
-      auth:
-        enabled: false
-  ingress:
-    enabled: true
-    hostname: mlflow.tgu.ovh
-    annotations:
-      cert-manager.io/cluster-issuer: "letsencrypt-prod"
-      nginx.ingress.kubernetes.io/proxy-body-size: 512m
-    tls: true
+    auth:
+      enabled: false
+    ingress:
+      enabled: true
+      hostname: mlflow.tgu.ovh
+      annotations:
+        cert-manager.io/cluster-issuer: "letsencrypt-prod"
+        nginx.ingress.kubernetes.io/proxy-body-size: 512m
+      tls: true
   postgresql:
     auth:
       password: bn_mlflow
