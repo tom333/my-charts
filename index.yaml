@@ -404,4 +404,18 @@ entries:
     urls:
     - https://github.com/tom333/my-charts/releases/download/datalab-1.0.0/datalab-1.0.0.tgz
     version: 1.0.0
-generated: "2025-07-17T23:11:03.008642776Z"
+  jupyter:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2025-07-20T08:41:16.94086673Z"
+    description: A Helm chart for Jupyter Notebook/Lab
+    digest: 593797120fc2e48049cc46a9194b7110617cf2224f0696bd8813c199f79dbae3
+    maintainers:
+    - name: Thomas Guyader
+      url: https://github.com/tom333
+    name: jupyter
+    type: application
+    urls:
+    - https://github.com/tom333/my-charts/releases/download/jupyter-0.1.0/jupyter-0.1.0.tgz
+    version: 0.1.0
+generated: "2025-07-20T08:41:16.94091996Z"
