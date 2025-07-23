@@ -5,10 +5,10 @@
 replicaCount: 1
 
 image:
-  repository: jupyter/minimal-notebook
+  repository: quay.io/jupyter/scipy-notebook
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: latest
 
 imagePullSecrets: []
 nameOverride: ""
