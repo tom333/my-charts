@@ -45,6 +45,16 @@ spec:
           env:
             - name: JUPYTER_TOKEN
               value: {{ .Values.jupyterToken | quote }}
+            - name: JUPYTER_PORT
+              value: "8888"
+            - name: JUPYTER_ENABLE_LAB
+              value: "yes"
+            - name: JUPYTER_SERVER_ROOT
+              value: "/home/jovyan"
+            - name: JUPYTER_SERVER_APP
+              value: "jupyter_server.serverapp.ServerApp"
+            - name: JUPYTER_SERVER_HTTP_PORT
+              value: "8888"
       volumes:
         - name: jupyter-data
           {{- if .Values.persistence.enabled }}
