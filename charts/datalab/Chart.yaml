@@ -1,9 +1,9 @@
 apiVersion: v2
 name: datalab
-version: 1.0.21
+version: 1.0.22
 dependencies:
   - name: mlflow
-    version: 5.1.4
+    version: 5.1.7
     repository: https://charts.bitnami.com/bitnami
   - name: minio
     version: 5.4.0
