@@ -12,5 +12,5 @@ dependencies:
     version: 13.0.4
     repository: https://charts.bitnami.com/bitnami
   - name: zenml
-    version: 0.84.1
+    version: 0.84.2
     repository: oci://public.ecr.aws/zenml
