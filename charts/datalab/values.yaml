@@ -42,6 +42,8 @@ mlflow:
         cert-manager.io/cluster-issuer: "letsencrypt-prod"
         nginx.ingress.kubernetes.io/proxy-body-size: 512m
         nginx.ingress.kubernetes.io/proxy-connect-timeout: 180s
+        nginx.ingress.kubernetes.io/proxy-read-timeout: "300"
+        nginx.ingress.kubernetes.io/proxy-send-timeout: "300"
       tls: true
     service: 
       type: ClusterIP
