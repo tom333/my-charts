@@ -45,15 +45,6 @@ mlflow:
       tls: true
     service: 
       type: ClusterIP
-    command:
-      - /opt/bitnami/python/bin/gunicorn
-    args:
-      - --timeout
-      - "240"
-      - --bind
-      - 0.0.0.0:5000
-      - mlflow.server:app
-
   postgresql:
     auth:
       password: bn_mlflow
