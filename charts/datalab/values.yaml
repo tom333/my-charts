@@ -48,7 +48,7 @@ mlflow:
     service: 
       type: ClusterIP
     extraArgs: 
-      - --gunicorn-opts "--timeout=240"
+      - --gunicorn-opts="--timeout=240"
     resourcesPreset: 2xlarge
   postgresql:
     auth:
