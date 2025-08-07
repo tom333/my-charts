@@ -47,6 +47,8 @@ mlflow:
       tls: true
     service: 
       type: ClusterIP
+    extraArgs: '--timeout 240'
+    resourcesPreset: 2xlarge
   postgresql:
     auth:
       password: bn_mlflow
