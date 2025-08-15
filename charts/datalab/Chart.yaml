@@ -3,7 +3,7 @@ name: datalab
 version: 1.0.29
 dependencies:
   - name: mlflow
-    version: 5.1.11
+    version: 5.1.13
     repository: https://charts.bitnami.com/bitnami
   - name: minio
     version: 5.4.0
