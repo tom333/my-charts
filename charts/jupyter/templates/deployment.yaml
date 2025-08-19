@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ include "jupyter.fullname" . }}
-  namespace: {{ .Values.namespace | default "datalab" }}
+  namespace: {{ .Release.Namespace }}
   labels:
     {{- include "jupyter.labels" . | nindent 4 }}
 spec:
@@ -33,11 +33,11 @@ spec:
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: /
+              path: /api
               port: http
           readinessProbe:
             httpGet:
-              path: /
+              path: /api
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}

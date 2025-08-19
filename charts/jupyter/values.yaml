@@ -96,3 +96,5 @@ persistence:
   storageClass: ""
   accessMode: ReadWriteOnce
   size: 10Gi
+
+jupyterToken: ""

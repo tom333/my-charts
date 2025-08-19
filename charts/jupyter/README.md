@@ -34,7 +34,6 @@ The command removes all the Kubernetes components associated with the chart and 
 
 | Name                | Description                                     | Value           |
 | ------------------- | ----------------------------------------------- | --------------- |
-| `namespace`         | Namespace for the deployment                    | `datalab`       |
 | `replicaCount`      | Number of replicas to deploy                    | `1`             |
 
 ### Jupyter parameters
