@@ -102,3 +102,8 @@ zenml:
       tls:
         enabled: true
         secretName: zenml-tls-certs
+
+# Persistence configuration
+persistence:
+ size: 10Gi
+ accessMode: ReadWriteOnce
