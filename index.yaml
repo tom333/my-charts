@@ -2,6 +2,26 @@ apiVersion: v1
 entries:
   datalab:
   - apiVersion: v2
+    created: "2025-08-20T08:07:37.747206885Z"
+    dependencies:
+    - name: mlflow
+      repository: https://charts.bitnami.com/bitnami
+      version: 5.1.15
+    - name: minio
+      repository: https://charts.min.io/
+      version: 5.4.0
+    - name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 13.0.4
+    - name: zenml
+      repository: oci://public.ecr.aws/zenml
+      version: 0.84.2
+    digest: ed9bd8d01dc7f6b21e550b007e97b1cfeb9daa79f793505262867ac6b59f1899
+    name: datalab
+    urls:
+    - https://github.com/tom333/my-charts/releases/download/datalab-1.0.30/datalab-1.0.30.tgz
+    version: 1.0.30
+  - apiVersion: v2
     created: "2025-08-07T21:53:45.634638651Z"
     dependencies:
     - name: mlflow
@@ -607,6 +627,19 @@ entries:
   jupyter:
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2025-08-20T08:07:37.899320288Z"
+    description: A Helm chart for Jupyter Notebook/Lab
+    digest: 4c89ccdc7ad6bff817a244e04d226e3594db19edd49009b92e77490ec7a570fa
+    maintainers:
+    - name: Thomas Guyader
+      url: https://github.com/tom333
+    name: jupyter
+    type: application
+    urls:
+    - https://github.com/tom333/my-charts/releases/download/jupyter-0.1.6/jupyter-0.1.6.tgz
+    version: 0.1.6
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2025-07-25T23:46:12.48271175Z"
     description: A Helm chart for Jupyter Notebook/Lab
     digest: 490419d992ab401f71470a0f86e395dea7063864f62a4d4fb64f27326603280e
@@ -683,4 +716,4 @@ entries:
     urls:
     - https://github.com/tom333/my-charts/releases/download/jupyter-0.1.0/jupyter-0.1.0.tgz
     version: 0.1.0
-generated: "2025-08-07T21:53:45.634963975Z"
+generated: "2025-08-20T08:07:37.899597906Z"
