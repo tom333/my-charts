@@ -9,7 +9,7 @@ dependencies:
   #   version: 4.103.1
   #   repository: https://helm.coder.com/v2
   - name: qdrant
-    version: 1.15.3
+    version: 1.15.4
     repository: https://qdrant.github.io/qdrant-helm
   - name: ollama
     version: 1.28.0
