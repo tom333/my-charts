@@ -12,5 +12,5 @@ dependencies:
     version: 1.15.5
     repository: https://qdrant.github.io/qdrant-helm
   - name: ollama
-    version: 1.30.0
+    version: 1.31.0
     repository: https://otwld.github.io/ollama-helm
