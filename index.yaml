@@ -1,6 +1,44 @@
 apiVersion: v1
 entries:
+  code-server:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2025-10-29T09:07:39.501604038Z"
+    dependencies:
+    - name: qdrant
+      repository: https://qdrant.github.io/qdrant-helm
+      version: 1.15.5
+    - name: ollama
+      repository: https://otwld.github.io/ollama-helm
+      version: 1.32.0
+    description: A Helm chart for deploying code-server, qdrant, and ollama
+    digest: 489aa38d7d6443638012619076bcd0541260caf56fcdcb22b42b087bddc02ac6
+    name: code-server
+    type: application
+    urls:
+    - https://github.com/tom333/my-charts/releases/download/code-server-0.1.1/code-server-0.1.1.tgz
+    version: 0.1.1
   datalab:
+  - apiVersion: v2
+    created: "2025-10-29T09:07:39.691605031Z"
+    dependencies:
+    - name: mlflow
+      repository: https://charts.bitnami.com/bitnami
+      version: 5.1.17
+    - name: minio
+      repository: https://charts.min.io/
+      version: 5.4.0
+    - name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 13.0.4
+    - name: zenml
+      repository: oci://public.ecr.aws/zenml
+      version: 0.91.0
+    digest: df95b20d499c20279b1ede2718ff66b5897e47b83d8026252a4a56452943d6c2
+    name: datalab
+    urls:
+    - https://github.com/tom333/my-charts/releases/download/datalab-1.0.31/datalab-1.0.31.tgz
+    version: 1.0.31
   - apiVersion: v2
     created: "2025-08-20T08:07:37.747206885Z"
     dependencies:
@@ -716,4 +754,4 @@ entries:
     urls:
     - https://github.com/tom333/my-charts/releases/download/jupyter-0.1.0/jupyter-0.1.0.tgz
     version: 0.1.0
-generated: "2025-08-20T08:07:37.899597906Z"
+generated: "2025-10-29T09:07:39.69181822Z"
