@@ -35,6 +35,8 @@ mlflow:
   image:
     repository: bitnamilegacy/mlflow
   tracking:
+    image:
+      repository: bitnamilegacy/mlflow
     auth:
       enabled: false
     ingress:
