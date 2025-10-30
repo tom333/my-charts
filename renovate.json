@@ -13,6 +13,17 @@
         "digest"
       ],
       "automerge": true
+    },
+    {
+      "matchFileNames": ["charts/**/Chart.yaml", "charts/**/Chart.yml"],
+      "matchManagers": ["helmv3"],
+      "bumpVersions": [
+        {
+          "filePatterns": ["{{packageFileDir}}/Chart.{yaml,yml}"],
+          "matchStrings": ["version:\\s*(?<version>[^\\s]+)"],
+          "bumpType": "{{#if isMajor}}major{{else}}{{#if isMinor}}minor{{else}}patch{{/if}}{{/if}}"
+        }
+      ]
     }
   ],  
   "registryAliases": {
