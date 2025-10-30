@@ -32,6 +32,8 @@ minio:
   existingSecret: minio-root-secret
   
 mlflow: 
+  image:
+    repository: bitnamilegacy/mlflow
   tracking:
     auth:
       enabled: false
@@ -51,6 +53,8 @@ mlflow:
       - --gunicorn-opts="--timeout=240"
     resourcesPreset: 2xlarge
   postgresql:
+    image:
+      repository: bitnamilegacy/postgresql
     auth:
       password: bn_mlflow
       postgresPassword: bn_mlflow
@@ -63,6 +67,8 @@ mlflow:
     existingSecretKeySecretKey: rootPassword
   
 mysql:
+  image:
+    repository: bitnamilegacy/mysql
   auth:
     database: zenml
     username: zenml
