@@ -97,4 +97,17 @@ persistence:
   accessMode: ReadWriteOnce
   size: 10Gi
 
+# Health check configuration
+livenessProbe:
+  initialDelaySeconds: 60
+  periodSeconds: 30
+  timeoutSeconds: 10
+  failureThreshold: 5
+
+readinessProbe:
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 3
+
 jupyterToken: ""
