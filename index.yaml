@@ -705,6 +705,19 @@ entries:
   jupyter:
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2025-10-31T22:07:55.361828895Z"
+    description: A Helm chart for Jupyter Notebook/Lab
+    digest: ecd7e20f30298bd35b4c4695df9bdbb74088961708d6f515c206089b42e2848f
+    maintainers:
+    - name: Thomas Guyader
+      url: https://github.com/tom333
+    name: jupyter
+    type: application
+    urls:
+    - https://github.com/tom333/my-charts/releases/download/jupyter-0.1.11/jupyter-0.1.11.tgz
+    version: 0.1.11
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2025-10-31T06:19:06.387024858Z"
     description: A Helm chart for Jupyter Notebook/Lab
     digest: b0fd36446f54b174cd9e774f99032e9d3e0453033ce7186c175d0f3e9d9c3e2b
@@ -846,4 +859,4 @@ entries:
     urls:
     - https://github.com/tom333/my-charts/releases/download/jupyter-0.1.0/jupyter-0.1.0.tgz
     version: 0.1.0
-generated: "2025-10-31T06:19:06.38711184Z"
+generated: "2025-10-31T22:07:55.361966572Z"
