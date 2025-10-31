@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: jupyter/scipy-notebook
+  repository: quay.io/jupyter/scipy-notebook
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: "2025-10-27"
