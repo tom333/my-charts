@@ -1,0 +1,18 @@
+{{- if and .Values.pipPackages.enabled .Values.pipPackages.persistInstallation }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "jupyter.fullname" . }}-packages-pvc
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "jupyter.labels" . | nindent 4 }}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  {{- if .Values.persistence.storageClass }}
+  storageClassName: {{ .Values.persistence.storageClass | quote }}
+  {{- end }}
+  resources:
+    requests:
+      storage: {{ .Values.pipPackages.storageSize | default "1Gi" }}
+{{- end }}

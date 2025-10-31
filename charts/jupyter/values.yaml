@@ -5,10 +5,10 @@
 replicaCount: 1
 
 image:
-  repository: quay.io/jupyterhub/jupyterhub
+  repository: jupyter/scipy-notebook
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: 5.4.2
+  tag: "2025-10-27"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -111,3 +111,19 @@ readinessProbe:
   failureThreshold: 3
 
 jupyterToken: ""
+
+# Additional pip packages to install at startup
+pipPackages:
+  enabled: false
+  packages: []
+  # Example:
+  # packages:
+  #   - pandas==2.0.0
+  #   - numpy
+  #   - matplotlib
+  #   - scikit-learn
+  upgradeStrategy: "--upgrade --no-cache-dir"
+  # Persist installed packages across pod restarts (requires shared storage)
+  persistInstallation: false
+  # Storage size for persistent packages (only used if persistInstallation is true)
+  storageSize: "1Gi"

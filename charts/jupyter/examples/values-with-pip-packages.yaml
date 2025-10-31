@@ -1,0 +1,90 @@
+# Exemple de configuration pour l'installation de packages pip avec Init Container
+
+# Configuration de base pour Jupyter avec packages pip
+replicaCount: 1
+
+image:
+  repository: jupyter/datascience-notebook
+  tag: "2024-10-07"
+  pullPolicy: IfNotPresent
+
+# Configuration des packages pip
+pipPackages:
+  enabled: true
+  packages:
+    # Data Science packages
+    - pandas==2.0.3
+    - numpy==1.24.3
+    - matplotlib==3.7.1
+    - seaborn==0.12.2
+    - plotly==5.15.0
+    
+    # Machine Learning packages
+    - scikit-learn==1.3.0
+    - scipy==1.11.1
+    
+    # Utility packages
+    - requests==2.31.0
+    - beautifulsoup4==4.12.2
+    - openpyxl==3.1.2
+    
+    # Jupyter extensions
+    - jupyterlab-widgets==3.0.8
+    - ipywidgets==8.0.7
+
+  # Options d'installation
+  upgradeStrategy: "--upgrade --no-cache-dir"
+  
+  # Persistance des packages (optionnel)
+  persistInstallation: false  # Mettre à true pour persister les packages
+  storageSize: "2Gi"          # Taille du volume pour la persistance
+
+# Configuration de persistance des données utilisateur
+persistence:
+  enabled: true
+  storageClass: ""
+  accessMode: ReadWriteOnce
+  size: 10Gi
+
+# Configuration des health checks (ajustée pour le temps d'installation des packages)
+livenessProbe:
+  initialDelaySeconds: 120  # Augmenté pour laisser le temps aux packages de s'installer
+  periodSeconds: 30
+  timeoutSeconds: 10
+  failureThreshold: 5
+
+readinessProbe:
+  initialDelaySeconds: 60   # Augmenté pour laisser le temps aux packages de s'installer
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 3
+
+# Configuration du service et ingress
+service:
+  type: ClusterIP
+  port: 8888
+
+ingress:
+  enabled: true
+  className: "nginx"
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+  hosts:
+    - host: jupyter.example.com
+      paths:
+        - path: /
+          pathType: Prefix
+
+# Token de sécurité Jupyter
+jupyterToken: "my-secure-token-here"
+
+# Ressources (recommandées pour l'installation des packages)
+resources:
+  limits:
+    cpu: 2
+    memory: 4Gi
+  requests:
+    cpu: 500m
+    memory: 1Gi
