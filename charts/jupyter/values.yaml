@@ -5,10 +5,10 @@
 replicaCount: 1
 
 image:
-  repository: docker.io/elyra/elyra
+  repository: quay.io/jupyterhub/jupyterhub
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: 3.15.0
+  tag: 5.4.2
 
 imagePullSecrets: []
 nameOverride: ""
