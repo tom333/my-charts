@@ -5,10 +5,10 @@
 replicaCount: 1
 
 image:
-  repository: quay.io/jupyter/scipy-notebook
+  repository: docker.io/elyra/elyra
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: latest
+  tag: 3.15.0
 
 imagePullSecrets: []
 nameOverride: ""

@@ -3,7 +3,7 @@ name: jupyter
 description: A Helm chart for Jupyter Notebook/Lab
 type: application
 version: 0.1.6
-appVersion: "1.0.0"
+appVersion: "1.0.1"
 maintainers:
   - name: Thomas Guyader
     url: "https://github.com/tom333"
