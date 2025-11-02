@@ -112,6 +112,13 @@ readinessProbe:
 
 jupyterToken: ""
 
+# Additional environment variables
+env: {}
+  # Example:
+  # CUSTOM_VAR: "value"
+  # ANOTHER_VAR: "another_value"
+  # NUMERIC_VAR: "123"
+
 # Additional pip packages to install at startup
 pipPackages:
   enabled: false
