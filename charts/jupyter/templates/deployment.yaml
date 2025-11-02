@@ -21,28 +21,77 @@ spec:
       {{- end }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
-      {{- if .Values.pipPackages.enabled }}
-      initContainers:
-        - name: pip-installer
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command: ["/bin/bash"]
-          args: ["/scripts/install-packages.sh"]
-          volumeMounts:
-            - name: pip-installer-script
-              mountPath: /scripts
-            - name: shared-packages
-              mountPath: /shared-packages
-          env:
-            - name: PYTHONPATH
-              value: "/shared-packages"
-      {{- end }}
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{- if .Values.pipPackages.enabled }}
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                  - /bin/bash
+                  - -c
+                  - |
+                    set -e
+                    echo "=== Starting pip packages installation via lifecycle ==="
+                    echo "Timestamp: $(date)"
+                    
+                    # Check if packages are already installed (for persistent volumes)
+                    MARKER_FILE="/shared-packages/.packages_installed"
+                    if [[ -f "$MARKER_FILE" && "{{ .Values.pipPackages.persistInstallation }}" == "true" ]]; then
+                      echo "Packages already installed (marker file found). Skipping installation."
+                      exit 0
+                    fi
+                    
+                    # Create shared packages directory if it doesn't exist
+                    mkdir -p /shared-packages
+                    
+                    # Create requirements file
+                    cat > /tmp/requirements.txt << 'EOF'
+                    {{- range .Values.pipPackages.packages }}
+                    {{ . }}
+                    {{- end }}
+                    EOF
+                    
+                    echo "Requirements file content:"
+                    cat /tmp/requirements.txt
+                    
+                    # Install packages directly to shared volume
+                    if [ -s /tmp/requirements.txt ]; then
+                      echo "Installing packages to shared volume..."
+                      
+                      # Install packages to the shared directory
+                      pip install {{ .Values.pipPackages.upgradeStrategy }} \
+                        --target /shared-packages \
+                        --no-deps \
+                        -r /tmp/requirements.txt
+                      
+                      # Also install dependencies
+                      echo "Installing dependencies..."
+                      pip install {{ .Values.pipPackages.upgradeStrategy }} \
+                        --target /shared-packages \
+                        -r /tmp/requirements.txt
+                      
+                      echo "Packages installed successfully!"
+                      
+                      # Create marker file for persistence
+                      echo "$(date): Packages installed" > "$MARKER_FILE"
+                      echo "Installed packages:" >> "$MARKER_FILE"
+                      cat /tmp/requirements.txt >> "$MARKER_FILE"
+                      
+                    else
+                      echo "No packages to install."
+                    fi
+                    
+                    # List installed packages in shared volume
+                    echo "Contents of /shared-packages:"
+                    ls -la /shared-packages/ || true
+                    
+                    echo "=== Installation completed successfully ==="
+          {{- end }}
           ports:
             - name: http
               containerPort: 8888
@@ -99,10 +148,6 @@ spec:
           emptyDir: {}
           {{- end }}
         {{- if .Values.pipPackages.enabled }}
-        - name: pip-installer-script
-          configMap:
-            name: {{ include "jupyter.fullname" . }}-pip-installer
-            defaultMode: 0755
         - name: shared-packages
           {{- if .Values.pipPackages.persistInstallation }}
           persistentVolumeClaim:
