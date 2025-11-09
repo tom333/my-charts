@@ -2,7 +2,7 @@ apiVersion: v2
 name: code-server
 description: A Helm chart for deploying code-server, qdrant, and ollama
 type: application
-version: 0.2.0
+version: 0.3.0
 appVersion: "1.0.0"
 dependencies:
   # - name: code-server
@@ -12,5 +12,5 @@ dependencies:
     version: 1.15.5
     repository: https://qdrant.github.io/qdrant-helm
   - name: ollama
-    version: 1.33.0
+    version: 1.34.0
     repository: https://otwld.github.io/ollama-helm
