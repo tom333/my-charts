@@ -71,6 +71,26 @@ entries:
     version: 0.1.1
   datalab:
   - apiVersion: v2
+    created: "2025-11-19T14:39:08.936298419Z"
+    dependencies:
+    - name: mlflow
+      repository: https://charts.bitnami.com/bitnami
+      version: 5.1.17
+    - name: minio
+      repository: https://charts.min.io/
+      version: 5.4.0
+    - name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 13.0.4
+    - name: zenml
+      repository: oci://public.ecr.aws/zenml
+      version: 0.91.2
+    digest: eda55a724b9cef0a309541ced84fdc87a24b2103ad97f6d409fd5900195c1ae6
+    name: datalab
+    urls:
+    - https://github.com/tom333/my-charts/releases/download/datalab-1.0.35/datalab-1.0.35.tgz
+    version: 1.0.35
+  - apiVersion: v2
     created: "2025-11-12T01:51:41.470032406Z"
     dependencies:
     - name: mlflow
@@ -982,4 +1002,4 @@ entries:
     urls:
     - https://github.com/tom333/my-charts/releases/download/jupyter-0.1.0/jupyter-0.1.0.tgz
     version: 0.1.0
-generated: "2025-11-18T03:11:13.567817764Z"
+generated: "2025-11-19T14:39:08.936603961Z"
