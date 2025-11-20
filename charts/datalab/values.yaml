@@ -55,7 +55,7 @@ mlflow:
       extraEnvVars:
         - MLFLOW_S3_ENDPOINT_URL=http://minio-service:9000
       # -- S3 bucket name
-      bucket: ""mlflow" # required
+      bucket: "mlflow" # required
       # -- S3 bucket folder. If you want to use root level, please don't set anything.
       path: "" # optional
       # -- AWS IAM user AWS_ACCESS_KEY_ID which has attached policy for access to the S3 bucket
