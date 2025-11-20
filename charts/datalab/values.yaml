@@ -41,14 +41,7 @@ mlflow:
 
   backendStore:
     databaseMigration: true
-    postgres:
-      enabled: true
-      host: "ia-lab-postgresql-service"
-      port: 5432
-      database: "mlflow"
-      user: "mlflow"
-      password: "mlflow"
-      driver: "psycopg2"
+    # postgres section removed to avoid schema conflicts with postgresql subchart
 
   artifactRoot:
     s3:
@@ -63,7 +56,8 @@ mlflow:
     MLFLOW_S3_ENDPOINT_URL: "http://minio-service:9000"
     MLFLOW_S3_IGNORE_TLS: "true"
 
-  gunicornOpts: "--timeout 240"
+  # extraArgs:
+  #   gunicornOpts: "--timeout 240"
 
   ingress:
     enabled: true
