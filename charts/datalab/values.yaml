@@ -32,6 +32,9 @@ minio:
   existingSecret: minio-root-secret
   
 mlflow: 
+  # Flask server secret key - will be auto-generated if not set
+  flaskServerSecretKey: ""
+
   postgresql:
     enabled: true
     auth:
