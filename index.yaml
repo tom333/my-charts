@@ -105,6 +105,26 @@ entries:
     version: 0.1.1
   datalab:
   - apiVersion: v2
+    created: "2025-12-01T04:08:02.520800453Z"
+    dependencies:
+    - name: mlflow
+      repository: https://community-charts.github.io/helm-charts
+      version: 1.8.0
+    - name: minio
+      repository: https://charts.min.io/
+      version: 5.4.0
+    - name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 13.0.4
+    - name: zenml
+      repository: oci://public.ecr.aws/zenml
+      version: 0.91.2
+    digest: 244f83e7e37b8032df76377000c8cb3283c24645492eb491f336fdffc3ea25e9
+    name: datalab
+    urls:
+    - https://github.com/tom333/my-charts/releases/download/datalab-1.0.39/datalab-1.0.39.tgz
+    version: 1.0.39
+  - apiVersion: v2
     created: "2025-11-20T05:22:36.118411384Z"
     dependencies:
     - name: mlflow
@@ -1096,4 +1116,4 @@ entries:
     urls:
     - https://github.com/tom333/my-charts/releases/download/jupyter-0.1.0/jupyter-0.1.0.tgz
     version: 0.1.0
-generated: "2025-11-26T21:04:48.305005663Z"
+generated: "2025-12-01T04:08:02.521147547Z"
