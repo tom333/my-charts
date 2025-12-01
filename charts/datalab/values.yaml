@@ -36,16 +36,19 @@ mlflow:
   flaskServerSecretKey: ""
 
   postgresql:
-    enabled: true
-    auth:
-      username: "mlflow"
-      password: "mlflow"
-      database: "mlflow"
+    enabled: false  # Disable subchart PostgreSQL
 
   backendStore:
     databaseMigration: true
     databaseConnectionCheck: true
-    # postgres section removed to avoid schema conflicts with postgresql subchart
+    postgres:
+      enabled: true
+      host: "lab-postgresql"  # Use existing PostgreSQL service
+      port: 5432
+      database: "mlflow"
+      user: "mlflow"
+      password: "mlflow"
+      driver: "psycopg2"
 
   artifactRoot:
     s3:
