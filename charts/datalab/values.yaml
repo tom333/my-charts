@@ -43,7 +43,7 @@ mlflow:
       database: "mlflow"
 
   backendStore:
-    databaseMigration: true
+    databaseMigration: false
     # postgres section removed to avoid schema conflicts with postgresql subchart
 
   artifactRoot:
