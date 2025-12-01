@@ -2,14 +2,5 @@ dependencies:
 - name: mlflow
   repository: https://community-charts.github.io/helm-charts
   version: 1.8.0
-- name: minio
-  repository: https://charts.min.io/
-  version: 5.4.0
-- name: mysql
-  repository: https://charts.bitnami.com/bitnami
-  version: 13.0.4
-- name: zenml
-  repository: oci://public.ecr.aws/zenml
-  version: 0.91.2
-digest: sha256:2a248a1df289012fa3324b127303b91c594e3f1afecc1a59e338d3715bc65f86
-generated: "2025-12-01T14:51:50.392942116+11:00"
+digest: sha256:75fed08d89d040751312da1f6fbf4899e272c034f7612803cfa558d8cb573e89
+generated: "2025-12-02T09:03:56.403288259+11:00"
