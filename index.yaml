@@ -105,6 +105,17 @@ entries:
     version: 0.1.1
   datalab:
   - apiVersion: v2
+    created: "2025-12-01T22:05:28.318992463Z"
+    dependencies:
+    - name: mlflow
+      repository: https://community-charts.github.io/helm-charts
+      version: 1.8.0
+    digest: afbe0048299e94e0511dc54d948dbe57cdc76ff6c06affe55d89e732d46a393f
+    name: datalab
+    urls:
+    - https://github.com/tom333/my-charts/releases/download/datalab-1.0.42/datalab-1.0.42.tgz
+    version: 1.0.42
+  - apiVersion: v2
     created: "2025-12-01T04:35:06.965208263Z"
     dependencies:
     - name: mlflow
@@ -1156,4 +1167,4 @@ entries:
     urls:
     - https://github.com/tom333/my-charts/releases/download/jupyter-0.1.0/jupyter-0.1.0.tgz
     version: 0.1.0
-generated: "2025-12-01T04:35:06.965521669Z"
+generated: "2025-12-01T22:05:28.319285119Z"
