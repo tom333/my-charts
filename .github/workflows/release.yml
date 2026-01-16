@@ -31,6 +31,8 @@ jobs:
           helm repo add community-charts https://community-charts.github.io/helm-charts
           helm repo add minio https://charts.min.io/
           helm repo add bitnami https://charts.bitnami.com/bitnami
+          helm repo add ollama https://otwld.github.io/ollama-helm
+          helm repo add qdrant https://qdrant.github.io/qdrant-helm
           helm repo update
       
       - name: Build chart dependencies
@@ -38,7 +40,7 @@ jobs:
           for chart in charts/*/; do
             if [ -f "${chart}Chart.yaml" ]; then
               echo "Building dependencies for ${chart}"
-              helm dependency update "${chart}" || echo "No dependencies or build failed for ${chart}"
+              helm dependency build "${chart}" || echo "No dependencies or build failed for ${chart}"
             fi
           done
       
