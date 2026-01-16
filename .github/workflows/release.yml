@@ -38,7 +38,7 @@ jobs:
           for chart in charts/*/; do
             if [ -f "${chart}Chart.yaml" ]; then
               echo "Building dependencies for ${chart}"
-              helm dependency build "${chart}" || echo "No dependencies or build failed for ${chart}"
+              helm dependency update "${chart}" || echo "No dependencies or build failed for ${chart}"
             fi
           done
       
