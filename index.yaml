@@ -3,6 +3,23 @@ entries:
   code-server:
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2026-01-20T23:13:12.660054034Z"
+    dependencies:
+    - name: qdrant
+      repository: https://qdrant.github.io/qdrant-helm
+      version: 1.16.3
+    - name: ollama
+      repository: https://otwld.github.io/ollama-helm
+      version: 1.38.0
+    description: A Helm chart for deploying code-server, qdrant, and ollama
+    digest: 7011d6352dda7d180bced230606e1e6369067707dc271bbc21089dd5afa913cd
+    name: code-server
+    type: application
+    urls:
+    - https://github.com/tom333/my-charts/releases/download/code-server-0.10.0/code-server-0.10.0.tgz
+    version: 0.10.0
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2026-01-16T05:02:07.483409407Z"
     dependencies:
     - name: qdrant
@@ -121,6 +138,17 @@ entries:
     - https://github.com/tom333/my-charts/releases/download/code-server-0.1.1/code-server-0.1.1.tgz
     version: 0.1.1
   datalab:
+  - apiVersion: v2
+    created: "2026-01-20T23:13:12.832701399Z"
+    dependencies:
+    - name: mlflow
+      repository: https://community-charts.github.io/helm-charts
+      version: 1.8.1
+    digest: 2c3c9d2b1e08cee4de1db73cf8c132ec30f5e4876e05859624c8a8663cbdcb42
+    name: datalab
+    urls:
+    - https://github.com/tom333/my-charts/releases/download/datalab-1.0.47/datalab-1.0.47.tgz
+    version: 1.0.47
   - apiVersion: v2
     created: "2026-01-16T05:02:07.645517677Z"
     dependencies:
@@ -1000,6 +1028,19 @@ entries:
   jupyter:
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2026-01-20T23:13:13.048542655Z"
+    description: A Helm chart for Jupyter Notebook/Lab
+    digest: 71e90d3f7ac7571e0138b02e7f71b89797eae644cf02ceeee5fc793a421eb643
+    maintainers:
+    - name: Thomas Guyader
+      url: https://github.com/tom333
+    name: jupyter
+    type: application
+    urls:
+    - https://github.com/tom333/my-charts/releases/download/jupyter-0.1.18/jupyter-0.1.18.tgz
+    version: 0.1.18
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2026-01-16T05:02:07.770318645Z"
     description: A Helm chart for Jupyter Notebook/Lab
     digest: 075032c5245a555de30b30fdc55803e618356e910afc9f2ac553810fa5d396c8
@@ -1219,4 +1260,4 @@ entries:
     urls:
     - https://github.com/tom333/my-charts/releases/download/jupyter-0.1.0/jupyter-0.1.0.tgz
     version: 0.1.0
-generated: "2026-01-16T05:02:07.77121881Z"
+generated: "2026-01-20T23:13:13.048990206Z"
