@@ -76,7 +76,6 @@ spec:
                         
                         # Try to install packages, but don't fail the container if it fails
                         if pip install {{ .Values.pipPackages.upgradeStrategy }} \
-                          --target /shared-packages \
                           -r /tmp/requirements.txt; then
                           
                           echo "Packages installed successfully!"
@@ -85,10 +84,6 @@ spec:
                           echo "$(date): Packages installed" > "$MARKER_FILE"
                           echo "Installed packages:" >> "$MARKER_FILE"
                           cat /tmp/requirements.txt >> "$MARKER_FILE"
-                          
-                          # List installed packages in shared volume
-                          echo "Contents of /shared-packages:"
-                          ls -la /shared-packages/ || true
                           
                         else
                           echo "WARNING: Failed to install some packages, but continuing..."

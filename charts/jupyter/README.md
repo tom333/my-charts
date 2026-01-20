@@ -142,3 +142,6 @@ kubectl logs -l app.kubernetes.io/name=jupyter -n <namespace>
 Copyright © 2023 My Kluster
 
 This chart is licensed under the [MIT License](https://opensource.org/licenses/MIT).
+
+
+
