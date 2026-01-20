@@ -31,24 +31,24 @@ minio:
 
   existingSecret: minio-root-secret
   
-mlflow: 
-  # Flask server secret key - will be auto-generated if not set
-  flaskServerSecretKey: ""
+# mlflow: 
+#   # Flask server secret key - will be auto-generated if not set
+#   flaskServerSecretKey: ""
 
-  postgresql:
-    enabled: false  # Disable subchart PostgreSQL
+#   postgresql:
+#     enabled: false  # Disable subchart PostgreSQL
 
-  backendStore:
-    databaseMigration: true
-    databaseConnectionCheck: true
-    postgres:
-      enabled: true
-      host: "lab-postgresql"  # Use existing PostgreSQL service
-      port: 5432
-      database: "mlflow"
-      user: "mlflow"
-      password: "mlflow"
-      driver: "psycopg2"
+#   backendStore:
+#     databaseMigration: true
+#     databaseConnectionCheck: true
+#     postgres:
+#       enabled: true
+#       host: "lab-postgresql"  # Use existing PostgreSQL service
+#       port: 5432
+#       database: "mlflow"
+#       user: "mlflow"
+#       password: "mlflow"
+#       driver: "psycopg2"
 
   artifactRoot:
     s3:
