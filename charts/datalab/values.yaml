@@ -2,9 +2,9 @@
 postgresql:
   enabled: true
   auth:
-    username: mlflow
-    password: mlflow
-    database: mlflow
+    username: ducklake
+    password: ducklake
+    database: ducklake
     postgresPassword: postgres
   primary:
     persistence:
@@ -75,104 +75,83 @@ garage:
               - "*.web.tgu.ovh"
 
 # MLflow configuration
-mlflow:
-  # PostgreSQL backend configuration
-  backendStore:
-    postgres:
-      enabled: true
-      host: "datalab-postgresql"
-      port: 5432
-      database: "mlflow"
-      username: "mlflow"
-      password: "mlflow"
+# mlflow:
+#   # PostgreSQL backend configuration
+#   backendStore:
+#     postgres:
+#       enabled: true
+#       host: "datalab-postgresql"
+#       port: 5432
+#       database: "mlflow"
+#       username: "mlflow"
+#       password: "mlflow"
 
-  # S3 artifact store with Garage
-  artifactRoot:
-    s3:
-      enabled: true
-      bucket: "mlflow"
-      awsAccessKeyId: "GK..."
-      awsSecretAccessKey: "..."
+#   # S3 artifact store with Garage
+#   artifactRoot:
+#     s3:
+#       enabled: true
+#       bucket: "mlflow"
+#       awsAccessKeyId: "GK..."
+#       awsSecretAccessKey: "..."
 
-  # Environment variables for S3/Garage connection
-  extraEnvVars:
-    MLFLOW_S3_ENDPOINT_URL: "http://datalab-garage:3900"
-    MLFLOW_S3_IGNORE_TLS: "true"
-    AWS_DEFAULT_REGION: "garage"
+#   # Environment variables for S3/Garage connection
+#   extraEnvVars:
+#     MLFLOW_S3_ENDPOINT_URL: "http://datalab-garage:3900"
+#     MLFLOW_S3_IGNORE_TLS: "true"
+#     AWS_DEFAULT_REGION: "garage"
 
-  # Service configuration
-  service:
-    type: ClusterIP
-    port: 5000
+#   # Service configuration
+#   service:
+#     type: ClusterIP
+#     port: 5000
 
-  # Disable MLflow native ingress (ne gère pas TLS correctement)
-  ingress:
-    enabled: false
+#   # Disable MLflow native ingress (ne gère pas TLS correctement)
+#   ingress:
+#     enabled: false
   
-mysql:
-  image:
-    repository: bitnamilegacy/mysql
-  auth:
-    database: zenml
-    username: zenml
-    password: zenml
-    rootPassword: password
-  primary:
-    livenessProbe:
-        enabled: true
-        initialDelaySeconds: 300
-        periodSeconds: 10
-        timeoutSeconds: 1
-        failureThreshold: 45
-        successThreshold: 1
-    readinessProbe:
-        enabled: true
-        initialDelaySeconds: 300
-        periodSeconds: 10
-        timeoutSeconds: 1
-        failureThreshold: 45
-        successThreshold: 1
-    startupProbe:
-        enabled: true
-        initialDelaySeconds: 300
-        periodSeconds: 10
-        timeoutSeconds: 1
-        failureThreshold: 45
-        successThreshold: 1
-zenml:
-  zenml:
-    database:
-      url: "mysql://zenml:zenml@lab-mysql.ia-lab.svc.cluster.local:3306/zenml"
-    ingress:
-      enabled: true
-      annotations:
-        cert-manager.io/cluster-issuer: "letsencrypt-prod"
-      host: zenml.tgu.ovh
-      tls:
-        enabled: true
-        secretName: zenml-tls-certs
+# mysql:
+#   image:
+#     repository: bitnamilegacy/mysql
+#   auth:
+#     database: zenml
+#     username: zenml
+#     password: zenml
+#     rootPassword: password
 
-# Custom Ingress for MLflow with TLS support
-ingress:
-  enabled: true
-  className: "nginx"
-  annotations:
-    cert-manager.io/cluster-issuer: "letsencrypt-prod"
-    nginx.ingress.kubernetes.io/proxy-body-size: 512m
-    nginx.ingress.kubernetes.io/proxy-connect-timeout: "180"
-    nginx.ingress.kubernetes.io/proxy-read-timeout: "300"
-    nginx.ingress.kubernetes.io/proxy-send-timeout: "300"
-  hosts:
-    - host: mlflow.tgu.ovh
-      paths:
-        - path: /
-          pathType: Prefix
-  tls:
-    - secretName: mlflow-tls
-      hosts:
-        - mlflow.tgu.ovh
+# zenml:
+#   zenml:
+#     database:
+#       url: "mysql://zenml:zenml@lab-mysql.ia-lab.svc.cluster.local:3306/zenml"
+#     ingress:
+#       enabled: true
+#       annotations:
+#         cert-manager.io/cluster-issuer: "letsencrypt-prod"
+#       host: zenml.tgu.ovh
+#       tls:
+#         enabled: true
+#         secretName: zenml-tls-certs
 
-# Persistence configuration
-persistence:
- size: 10Gi
- accessMode: ReadWriteOnce
+# # Custom Ingress for MLflow with TLS support
+# ingress:
+#   enabled: true
+#   className: "nginx"
+#   annotations:
+#     cert-manager.io/cluster-issuer: "letsencrypt-prod"
+#     nginx.ingress.kubernetes.io/proxy-body-size: 512m
+#     nginx.ingress.kubernetes.io/proxy-connect-timeout: "180"
+#     nginx.ingress.kubernetes.io/proxy-read-timeout: "300"
+#     nginx.ingress.kubernetes.io/proxy-send-timeout: "300"
+#   hosts:
+#     - host: mlflow.tgu.ovh
+#       paths:
+#         - path: /
+#           pathType: Prefix
+#   tls:
+#     - secretName: mlflow-tls
+#       hosts:
+#         - mlflow.tgu.ovh
+
+# # Persistence configuration
+# persistence:
+#  size: 10Gi
+#  accessMode: ReadWriteOnce

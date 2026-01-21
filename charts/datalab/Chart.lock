@@ -1,18 +1,9 @@
 dependencies:
-- name: mlflow
-  repository: oci://ghcr.io/deliveryhero/helm-charts
-  version: 1.0.10
 - name: postgresql
   repository: https://charts.bitnami.com/bitnami
   version: 16.7.27
 - name: garage
   repository: https://charts.derwitt.dev
   version: 2.0.0
-- name: mysql
-  repository: https://charts.bitnami.com/bitnami
-  version: 13.0.4
-- name: zenml
-  repository: oci://public.ecr.aws/zenml
-  version: 0.93.1
-digest: sha256:72b726f66f37103dce8c690f3e5e22853a8c847d2c3e1428363fdd9b6288ced4
-generated: "2026-01-21T14:42:15.760383804+11:00"
+digest: sha256:37599fa213e920512eaf703c0521fbaa97aa03cb6b2b651d5ac2c0e4f1cc764e
+generated: "2026-01-21T16:16:39.537873499+11:00"
