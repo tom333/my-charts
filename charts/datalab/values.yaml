@@ -1,6 +1,7 @@
 # PostgreSQL configuration
 postgresql:
-  enabled: true
+  image:
+    repository: bitnamilegacy/postgresql
   auth:
     username: ducklake
     password: ducklake
