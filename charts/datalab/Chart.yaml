@@ -1,6 +1,6 @@
 apiVersion: v2
 name: datalab
-version: 1.2.0
+version: 2.0.0
 dependencies:
   - name: mlflow
     version: 1.0.10
@@ -12,7 +12,7 @@ dependencies:
     version: 2.0.0
     repository: https://charts.derwitt.dev
   - name: mysql
-    version: 13.0.4
+    version: 14.0.3
     repository: https://charts.bitnami.com/bitnami
   - name: zenml
     version: 0.93.1

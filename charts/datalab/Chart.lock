@@ -10,9 +10,9 @@ dependencies:
   version: 2.0.0
 - name: mysql
   repository: https://charts.bitnami.com/bitnami
-  version: 13.0.4
+  version: 14.0.3
 - name: zenml
   repository: oci://public.ecr.aws/zenml
   version: 0.93.1
-digest: sha256:72b726f66f37103dce8c690f3e5e22853a8c847d2c3e1428363fdd9b6288ced4
-generated: "2026-01-21T14:42:15.760383804+11:00"
+digest: sha256:483b30c194790938dd2e9c8b13e2db5e3d9c402775e15ac26bd30a3bd554051c
+generated: "2026-01-21T04:43:57.529335014Z"
