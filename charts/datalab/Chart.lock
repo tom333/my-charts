@@ -1,6 +1,12 @@
 dependencies:
 - name: mlflow
-  repository: https://community-charts.github.io/helm-charts
-  version: 1.8.1
-digest: sha256:9aae5dba503a21b281e322f059a63874e58245ee25babfeeb5379fa2e7373cdb
-generated: "2025-12-07T05:24:31.352803439Z"
+  repository: oci://ghcr.io/deliveryhero/helm-charts
+  version: 1.0.10
+- name: postgresql
+  repository: https://charts.bitnami.com/bitnami
+  version: 16.4.3
+- name: garage
+  repository: https://charts.derwitt.dev
+  version: 2.0.0
+digest: sha256:672a76ec028756376040de43a2630571b642eff79a43b3600a76dd415f971510
+generated: "2026-01-21T11:07:50.042368446+11:00"
