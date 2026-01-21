@@ -8,5 +8,11 @@ dependencies:
 - name: garage
   repository: https://charts.derwitt.dev
   version: 2.0.0
-digest: sha256:85adcf43117e0eb12d18fc5e72069e2772d0bc65969b59fc1d0e597e19ac15f9
-generated: "2026-01-21T00:27:07.13052867Z"
+- name: mysql
+  repository: https://charts.bitnami.com/bitnami
+  version: 13.0.4
+- name: zenml
+  repository: oci://public.ecr.aws/zenml
+  version: 0.93.1
+digest: sha256:72b726f66f37103dce8c690f3e5e22853a8c847d2c3e1428363fdd9b6288ced4
+generated: "2026-01-21T14:42:15.760383804+11:00"
