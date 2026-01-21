@@ -1,93 +1,147 @@
-minio:
-  replicas: 1
-  mode: standalone
-  persistence:
-    size: 10Gi
-  ingress:
-    enabled: true
-    annotations:
-      cert-manager.io/cluster-issuer: "letsencrypt-prod"
-      nginx.ingress.kubernetes.io/proxy-body-size: 1024m
-    path: /
-    hosts:
-      - minio.tgu.ovh
-    tls:
-      - secretName: minio-tls
-        hosts:
-          - minio.tgu.ovh
-  consoleIngress:
-    enabled: true
-    annotations:
-      cert-manager.io/cluster-issuer: "letsencrypt-prod"
-    paths: /
-    hosts:
-      - minio-console.tgu.ovh
-    tls:
-      - secretName: minio-console-tls
-        hosts:
-          - minio-console.tgu.ovh
-  environment:
-    MINIO_BROWSER_REDIRECT_URL: https://minio-console.tgu.ovh
+# PostgreSQL configuration
+postgresql:
+  enabled: true
+  auth:
+    username: mlflow
+    password: mlflow
+    database: mlflow
+    postgresPassword: postgres
+  primary:
+    persistence:
+      enabled: true
+      size: 10Gi
 
-  existingSecret: minio-root-secret
+# Garage S3 storage configuration
+garage:
+  # Deployment configuration
+  deployment:
+    replicaCount: 1
   
-# mlflow: 
-#   # Flask server secret key - will be auto-generated if not set
-#   flaskServerSecretKey: ""
+  # Garage configuration
+  garage:
+    replicationFactor: "1"  # 1 pour un seul nœud
+    s3:
+      api:
+        region: "garage"
+        rootDomain: ".s3.tgu.ovh"
+      web:
+        rootDomain: ".web.tgu.ovh"
+        index: "index.html"
+  
+  # Persistence
+  persistence:
+    enabled: true
+    meta:
+      size: 1Gi
+      storageClass: null
+    data:
+      size: 10Gi
+      storageClass: null
+  
+  # Ingress configuration
+  ingress:
+    s3:
+      api:
+        enabled: true
+        annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-prod"
+          nginx.ingress.kubernetes.io/proxy-body-size: 1024m
+        hosts:
+          - host: s3.tgu.ovh
+            paths:
+              - path: /
+                pathType: Prefix
+          - host: "*.s3.tgu.ovh"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - secretName: garage-s3-tls
+            hosts:
+              - s3.tgu.ovh
+              - "*.s3.tgu.ovh"
+      web:
+        enabled: true
+        annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-prod"
+        hosts:
+          - host: "*.web.tgu.ovh"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - secretName: garage-web-tls
+            hosts:
+              - "*.web.tgu.ovh"
 
-#   postgresql:
-#     enabled: false  # Disable subchart PostgreSQL
+# Legacy minio config (disabled)
+# minio:
+#   replicas: 1
+#   mode: standalone
+#   persistence:
+#     size: 10Gi
+#   ingress:
+#     enabled: true
+#     annotations:
+#       cert-manager.io/cluster-issuer: "letsencrypt-prod"
+#       nginx.ingress.kubernetes.io/proxy-body-size: 1024m
+#     path: /
+#     hosts:
+#       - minio.tgu.ovh
+#     tls:
+#       - secretName: minio-tls
+#         hosts:
+#           - minio.tgu.ovh
+#   consoleIngress:
+#     enabled: true
+#     annotations:
+#       cert-manager.io/cluster-issuer: "letsencrypt-prod"
+#     paths: /
+#     hosts:
+#       - minio-console.tgu.ovh
+#     tls:
+#       - secretName: minio-console-tls
+#         hosts:
+#           - minio-console.tgu.ovh
+#   environment:
+#     MINIO_BROWSER_REDIRECT_URL: https://minio-console.tgu.ovh
+#
+#   existingSecret: minio-root-secret
 
-#   backendStore:
-#     databaseMigration: true
-#     databaseConnectionCheck: true
-#     postgres:
-#       enabled: true
-#       host: "lab-postgresql"  # Use existing PostgreSQL service
-#       port: 5432
-#       database: "mlflow"
-#       user: "mlflow"
-#       password: "mlflow"
-#       driver: "psycopg2"
+# MLflow configuration
+mlflow:
+  # PostgreSQL backend configuration
+  backendStore:
+    postgres:
+      enabled: true
+      host: "datalab-postgresql"
+      port: 5432
+      database: "mlflow"
+      username: "mlflow"
+      password: "mlflow"
 
+  # S3 artifact store with Garage
   artifactRoot:
     s3:
       enabled: true
       bucket: "mlflow"
-      existingSecret:
-        name: "minio-root-secret"
-        keyOfAccessKeyId: "rootUser"
-        keyOfSecretAccessKey: "rootPassword"
+      awsAccessKeyId: "GK..."
+      awsSecretAccessKey: "..."
 
+  # Environment variables for S3/Garage connection
   extraEnvVars:
-    MLFLOW_S3_ENDPOINT_URL: "http://minio-service:9000"
+    MLFLOW_S3_ENDPOINT_URL: "http://datalab-garage:3900"
     MLFLOW_S3_IGNORE_TLS: "true"
+    AWS_DEFAULT_REGION: "garage"
 
-  # extraArgs:
-  #   gunicornOpts: "--timeout 240"
-
-  ingress:
-    enabled: true
-    className: "nginx"
-    annotations:
-      cert-manager.io/cluster-issuer: "letsencrypt-prod"
-      nginx.ingress.kubernetes.io/proxy-body-size: 512m
-      nginx.ingress.kubernetes.io/proxy-connect-timeout: 180s
-      nginx.ingress.kubernetes.io/proxy-read-timeout: "300"
-      nginx.ingress.kubernetes.io/proxy-send-timeout: "300"
-    hosts:
-      - host: mlflow.tgu.ovh
-        paths:
-          - path: /
-            pathType: ImplementationSpecific
-    tls: 
-     - secretName: mlflow-tls
-       hosts:
-         - mlflow.tgu.ovh
-
+  # Service configuration
   service:
     type: ClusterIP
-    port: 80
+    port: 5000
+
+  # Disable MLflow native ingress (ne gère pas TLS correctement)
+  ingress:
+    enabled: false
   
 mysql:
   image:
@@ -131,6 +185,31 @@ zenml:
       tls:
         enabled: true
         secretName: zenml-tls-certs
+
+# Custom Ingress for MLflow with TLS support
+ingress:
+  enabled: true
+  className: "nginx"
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/proxy-body-size: 512m
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "180"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "300"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "300"
+  hosts:
+    - host: mlflow.tgu.ovh
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: datalab-mlflow
+              port:
+                number: 5000
+  tls:
+    - secretName: mlflow-tls
+      hosts:
+        - mlflow.tgu.ovh
 
 # Persistence configuration
 persistence:
