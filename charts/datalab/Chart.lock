@@ -4,9 +4,9 @@ dependencies:
   version: 1.0.10
 - name: postgresql
   repository: https://charts.bitnami.com/bitnami
-  version: 16.4.3
+  version: 16.7.27
 - name: garage
   repository: https://charts.derwitt.dev
   version: 2.0.0
-digest: sha256:672a76ec028756376040de43a2630571b642eff79a43b3600a76dd415f971510
-generated: "2026-01-21T11:07:50.042368446+11:00"
+digest: sha256:85adcf43117e0eb12d18fc5e72069e2772d0bc65969b59fc1d0e597e19ac15f9
+generated: "2026-01-21T00:27:07.13052867Z"
