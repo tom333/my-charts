@@ -33,7 +33,7 @@ jobs:
           helm repo add ollama https://otwld.github.io/ollama-helm
           helm repo add qdrant https://qdrant.github.io/qdrant-helm
           helm repo add wittdennis https://charts.derwitt.dev
-          helm repo add deliveryhero oci://ghcr.io/deliveryhero/helm-charts
+          helm repo add deliveryhero https://raw.githubusercontent.com/deliveryhero/helm-charts/refs/heads/master/
           helm repo update
       
       - name: Build chart dependencies
