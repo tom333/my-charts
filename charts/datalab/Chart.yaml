@@ -1,12 +1,12 @@
 apiVersion: v2
 name: datalab
-version: 1.0.49
+version: 1.1.0
 dependencies:
   - name: mlflow
     version: 1.0.10
     repository: oci://ghcr.io/deliveryhero/helm-charts
   - name: postgresql
-    version: 16.4.3
+    version: 16.7.27
     repository: https://charts.bitnami.com/bitnami
   - name: garage
     version: 2.0.0
