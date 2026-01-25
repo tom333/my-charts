@@ -1,6 +1,6 @@
 apiVersion: v2
 name: datalab
-version: 1.3.2
+version: 1.4.0
 dependencies:
   # - name: mlflow
   #   version: 1.0.10
@@ -8,9 +8,9 @@ dependencies:
   - name: postgresql
     version: 16.7.27
     repository: https://charts.bitnami.com/bitnami
-  - name: garage
+  - name: rustfs
     version: 2.0.0
-    repository: https://charts.derwitt.dev
+    repository: https://charts.rustfs.com/
   # - name: mysql
   #   version: 13.0.4
   #   repository: https://charts.bitnami.com/bitnami

@@ -12,68 +12,39 @@ postgresql:
       enabled: true
       size: 10Gi
 
-# Garage S3 storage configuration
-garage:
-  # Deployment configuration
-  deployment:
-    replicaCount: 1
+# RustFS S3 storage configuration (standalone mode)
+rustfs:
+  # Standalone deployment configuration
+  mode: standalone
+  replicaCount: 1
   
-  # Garage configuration
-  garage:
-    replicationFactor: "1"  # 1 pour un seul nœud
-    s3:
-      api:
-        region: "garage"
-        rootDomain: ".s3.tgu.ovh"
-      web:
-        rootDomain: ".web.tgu.ovh"
-        index: "index.html"
+  # S3 configuration
+  s3:
+    region: "rustfs"
+    endpoint: "s3.tgu.ovh"
   
   # Persistence
   persistence:
     enabled: true
-    meta:
-      size: 1Gi
-      storageClass: null
-    data:
-      size: 10Gi
-      storageClass: null
+    size: 10Gi
+    storageClass: null
   
   # Ingress configuration
   ingress:
-    s3:
-      api:
-        enabled: true
-        annotations:
-          cert-manager.io/cluster-issuer: "letsencrypt-prod"
-          nginx.ingress.kubernetes.io/proxy-body-size: 1024m
+    enabled: true
+    className: nginx
+    annotations:
+      cert-manager.io/cluster-issuer: "letsencrypt-prod"
+      nginx.ingress.kubernetes.io/proxy-body-size: 1024m
+    hosts:
+      - host: s3.tgu.ovh
+        paths:
+          - path: /
+            pathType: Prefix
+    tls:
+      - secretName: rustfs-s3-tls
         hosts:
-          - host: s3.tgu.ovh
-            paths:
-              - path: /
-                pathType: Prefix
-          - host: "*.s3.tgu.ovh"
-            paths:
-              - path: /
-                pathType: Prefix
-        tls:
-          - secretName: garage-s3-tls
-            hosts:
-              - s3.tgu.ovh
-              - "*.s3.tgu.ovh"
-      web:
-        enabled: true
-        annotations:
-          cert-manager.io/cluster-issuer: "letsencrypt-prod"
-        hosts:
-          - host: "*.web.tgu.ovh"
-            paths:
-              - path: /
-                pathType: Prefix
-        tls:
-          - secretName: garage-web-tls
-            hosts:
-              - "*.web.tgu.ovh"
+          - s3.tgu.ovh
 
 # MLflow configuration
 # mlflow:
