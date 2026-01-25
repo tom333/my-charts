@@ -2,8 +2,8 @@ dependencies:
 - name: postgresql
   repository: https://charts.bitnami.com/bitnami
   version: 16.7.27
-- name: garage
-  repository: https://charts.derwitt.dev
-  version: 2.0.0
-digest: sha256:37599fa213e920512eaf703c0521fbaa97aa03cb6b2b651d5ac2c0e4f1cc764e
-generated: "2026-01-21T16:16:39.537873499+11:00"
+- name: rustfs
+  repository: https://charts.rustfs.com/
+  version: 0.0.81
+digest: sha256:9702323ac228d04f04bf0979e435200f59537ae7a15415e758a6b477246a43ef
+generated: "2026-01-25T12:50:29.017748322+11:00"
