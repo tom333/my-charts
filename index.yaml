@@ -139,6 +139,20 @@ entries:
     version: 0.1.1
   datalab:
   - apiVersion: v2
+    created: "2026-01-25T03:20:01.493765548Z"
+    dependencies:
+    - name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 16.7.27
+    - name: rustfs
+      repository: https://charts.rustfs.com/
+      version: 0.0.81
+    digest: 381260b3ae75d215750b982c079fabce2df04c6572a5919e5fdda92cfb708a92
+    name: datalab
+    urls:
+    - https://github.com/tom333/my-charts/releases/download/datalab-1.4.1/datalab-1.4.1.tgz
+    version: 1.4.1
+  - apiVersion: v2
     created: "2026-01-25T01:53:57.580746342Z"
     dependencies:
     - name: postgresql
@@ -1407,4 +1421,4 @@ entries:
     urls:
     - https://github.com/tom333/my-charts/releases/download/jupyter-0.1.0/jupyter-0.1.0.tgz
     version: 0.1.0
-generated: "2026-01-25T01:53:57.580945614Z"
+generated: "2026-01-25T03:20:01.493971001Z"
