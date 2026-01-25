@@ -1,9 +1,12 @@
 dependencies:
+- name: mlflow
+  repository: oci://ghcr.io/deliveryhero/helm-charts
+  version: 1.0.10
 - name: postgresql
   repository: https://charts.bitnami.com/bitnami
   version: 16.7.27
 - name: rustfs
   repository: https://charts.rustfs.com/
   version: 0.0.81
-digest: sha256:9702323ac228d04f04bf0979e435200f59537ae7a15415e758a6b477246a43ef
-generated: "2026-01-25T12:50:29.017748322+11:00"
+digest: sha256:2043fe9f40ff0bc7ca157e5ef854cb0d870c759cd03732308bbc3923891d0b30
+generated: "2026-01-25T18:56:38.432056783+11:00"

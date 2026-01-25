@@ -16,6 +16,7 @@ postgresql:
 rustfs:
   # Standalone deployment configuration
   mode: standalone
+  
   replicaCount: 1
   
   # S3 configuration
@@ -40,7 +41,6 @@ rustfs:
       nginx.ingress.kubernetes.io/session-cookie-hash: sha1
       nginx.ingress.kubernetes.io/session-cookie-max-age: "3600"
       nginx.ingress.kubernetes.io/session-cookie-name: rustfs
-    customAnnotations:
       cert-manager.io/cluster-issuer: "letsencrypt-prod"
     hosts:
       - host: s3.tgu.ovh
@@ -52,40 +52,54 @@ rustfs:
       secretName: rustfs-s3-tls
 
 # MLflow configuration
-# mlflow:
-#   # PostgreSQL backend configuration
-#   backendStore:
-#     postgres:
-#       enabled: true
-#       host: "datalab-postgresql"
-#       port: 5432
-#       database: "mlflow"
-#       username: "mlflow"
-#       password: "mlflow"
-
-#   # S3 artifact store with Garage
-#   artifactRoot:
-#     s3:
-#       enabled: true
-#       bucket: "mlflow"
-#       awsAccessKeyId: "GK..."
-#       awsSecretAccessKey: "..."
-
-#   # Environment variables for S3/Garage connection
-#   extraEnvVars:
-#     MLFLOW_S3_ENDPOINT_URL: "http://datalab-garage:3900"
-#     MLFLOW_S3_IGNORE_TLS: "true"
-#     AWS_DEFAULT_REGION: "garage"
-
-#   # Service configuration
-#   service:
-#     type: ClusterIP
-#     port: 5000
-
-#   # Disable MLflow native ingress (ne gère pas TLS correctement)
-#   ingress:
-#     enabled: false
+mlflow:
+  # PostgreSQL backend configuration
+  mlflow:
+    database:
+      hostname: "datalab-postgresql"
+      port: 5432
+      name: "ducklake"
+      username: "ducklake"
+      password: "ducklake"
+    
+    # S3 artifact store with RustFS
+    s3:
+      path: "s3://mlflow"
   
+  # Environment variables for S3/RustFS connection
+  extraEnvs:
+    - name: MLFLOW_S3_ENDPOINT_URL
+      value: "http://datalab-rustfs:9000"
+    - name: AWS_ACCESS_KEY_ID
+      value: "rustfsadmin"
+    - name: AWS_SECRET_ACCESS_KEY
+      value: "rustfsadmin"
+    - name: AWS_DEFAULT_REGION
+      value: "rustfs"
+  
+  # Service configuration
+  service:
+    type: ClusterIP
+    port: 80
+    targetPort: 5000
+  
+  # Ingress configuration
+  ingress:
+    enabled: true
+    path: /
+    hosts:
+      - mlflow.tgu.ovh
+    annotations:
+      cert-manager.io/cluster-issuer: "letsencrypt-prod"
+      nginx.ingress.kubernetes.io/proxy-body-size: "512m"
+      nginx.ingress.kubernetes.io/proxy-connect-timeout: "180"
+      nginx.ingress.kubernetes.io/proxy-read-timeout: "300"
+      nginx.ingress.kubernetes.io/proxy-send-timeout: "300"
+    tls:
+      - secretName: mlflow-tls
+        hosts:
+          - mlflow.tgu.ovh
+
 # mysql:
 #   image:
 #     repository: bitnamilegacy/mysql
