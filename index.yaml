@@ -3,6 +3,23 @@ entries:
   code-server:
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2026-01-26T16:52:47.167737643Z"
+    dependencies:
+    - name: qdrant
+      repository: https://qdrant.github.io/qdrant-helm
+      version: 1.16.3
+    - name: ollama
+      repository: https://otwld.github.io/ollama-helm
+      version: 1.39.0
+    description: A Helm chart for deploying code-server, qdrant, and ollama
+    digest: 677a87e5b439eb8032f19fa8a41e5736195ef507570208e5d8e59e28b33566eb
+    name: code-server
+    type: application
+    urls:
+    - https://github.com/tom333/my-charts/releases/download/code-server-0.11.0/code-server-0.11.0.tgz
+    version: 0.11.0
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2026-01-20T23:13:12.660054034Z"
     dependencies:
     - name: qdrant
@@ -1438,4 +1455,4 @@ entries:
     urls:
     - https://github.com/tom333/my-charts/releases/download/jupyter-0.1.0/jupyter-0.1.0.tgz
     version: 0.1.0
-generated: "2026-01-25T07:58:17.716347152Z"
+generated: "2026-01-26T16:52:47.167925666Z"
