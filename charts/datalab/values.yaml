@@ -1,3 +1,7 @@
+# Nom du chart
+nameOverride: ""
+fullnameOverride: ""
+
 # PostgreSQL configuration
 postgresql:
   image:
@@ -15,9 +19,6 @@ postgresql:
 
 # RustFS S3 storage configuration (standalone mode)
 rustfs:
-  # Standalone deployment configuration
-  mode: standalone
-  
   replicaCount: 1
   
   # S3 configuration
