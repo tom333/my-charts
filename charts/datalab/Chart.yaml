@@ -1,6 +1,6 @@
 apiVersion: v2
 name: datalab
-version: 1.5.1
+version: 1.5.2
 dependencies:
   - name: mlflow
     version: 1.0.10

@@ -3,20 +3,15 @@ postgresql:
   image:
     repository: bitnamilegacy/postgresql
   auth:
-    username: ducklake
-    password: ducklake
-    database: ducklake
+    username: mlflow
+    password: mlflow
+    database: mlflow
     postgresPassword: postgres
   primary:
     persistence:
       enabled: true
       size: 10Gi
-    # Créer une base de données supplémentaire pour MLflow
-    initdb:
-      scripts:
-        00_init_database.sql: |
-          CREATE USER mlflow WITH PASSWORD 'mlflow';
-          CREATE DATABASE mlflow OWNER mlflow;
+
 
 # RustFS S3 storage configuration (standalone mode)
 rustfs:
