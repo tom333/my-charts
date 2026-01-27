@@ -1,0 +1,86 @@
+name: Build and Publish MLflow Docker Image
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'charts/datalab/docker/Dockerfile'
+      - '.github/workflows/build-mlflow-image.yml'
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository_owner }}/mlflow-postgresql
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Extract MLflow version from Dockerfile
+        id: extract_version
+        run: |
+          VERSION=$(grep -oP 'ARG MLFLOW_VERSION=\K[^\s]+' charts/datalab/docker/Dockerfile || echo "v2.18.0")
+          echo "mlflow_version=${VERSION}" >> $GITHUB_OUTPUT
+          echo "Detected MLflow version: ${VERSION}"
+      
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=raw,value=${{ steps.extract_version.outputs.mlflow_version }}
+            type=raw,value=latest
+            type=sha,prefix=,suffix=,format=short
+      
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: charts/datalab
+          file: charts/datalab/docker/Dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          build-args: |
+            MLFLOW_VERSION=${{ steps.extract_version.outputs.mlflow_version }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          platforms: linux/amd64,linux/arm64
+      
+      - name: Output image details
+        run: |
+          echo "### MLflow Docker Image Published! 🚀" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Registry:** \`${{ env.REGISTRY }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "**Image:** \`${{ env.IMAGE_NAME }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "**MLflow Version:** \`${{ steps.extract_version.outputs.mlflow_version }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Available tags:**" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          echo "${{ steps.meta.outputs.tags }}" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Usage in values.yaml:**" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`yaml" >> $GITHUB_STEP_SUMMARY
+          echo "mlflow:" >> $GITHUB_STEP_SUMMARY
+          echo "  image:" >> $GITHUB_STEP_SUMMARY
+          echo "    repository: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}" >> $GITHUB_STEP_SUMMARY
+          echo "    tag: ${{ steps.extract_version.outputs.mlflow_version }}" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
