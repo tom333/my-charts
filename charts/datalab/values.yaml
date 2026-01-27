@@ -54,52 +54,73 @@ rustfs:
 
 # MLflow configuration
 mlflow:
-  # PostgreSQL backend configuration
-  mlflow:
-    database:
-      hostname: "lab-postgresql"
-      port: 5432
-      name: "mlflow"
-      username: "mlflow"
-      password: "mlflow"
-    
-    # S3 artifact store with RustFS
-    s3:
-      path: "s3://mlflow"
+  # Nombre de réplicas
+  replicaCount: 1
   
-  # Environment variables for S3/RustFS connection
-  extraEnvs:
-    - name: MLFLOW_S3_ENDPOINT_URL
-      value: "http://datalab-rustfs:9000"
-    - name: AWS_ACCESS_KEY_ID
-      value: "rustfsadmin"
-    - name: AWS_SECRET_ACCESS_KEY
-      value: "rustfsadmin"
-    - name: AWS_DEFAULT_REGION
-      value: "rustfs"
+  # Image MLflow
+  image:
+    repository: ghcr.io/mlflow/mlflow
+    tag: v2.18.0
+    pullPolicy: IfNotPresent
+  
+  imagePullSecrets: []
+  
+  # Configuration du backend store (PostgreSQL)
+  backendStore:
+    uri: "postgresql://mlflow:mlflow@lab-postgresql:5432/mlflow"
+  
+  # Configuration de l'artifact store (RustFS)
+  artifactsDestination: "s3://mlflow/artifacts"
+  
+  # Configuration S3/RustFS
+  s3:
+    region: "rustfs"
+    accessKeyId: "rustfsadmin"
+    secretAccessKey: "rustfsadmin"
+  
+  # Variables d'environnement supplémentaires
+  extraEnvs: []
+  
+  # Arguments supplémentaires pour la commande mlflow server
+  extraArgs: []
   
   # Service configuration
   service:
     type: ClusterIP
-    port: 80
-    targetPort: 5000
+    port: 5000
   
-  # Ingress configuration
-  ingress:
-    enabled: false
-    path: /
-    hosts:
-      - mlflow.tgu.ovh
-    annotations:
-      cert-manager.io/cluster-issuer: "letsencrypt-prod"
-      nginx.ingress.kubernetes.io/proxy-body-size: "512m"
-      nginx.ingress.kubernetes.io/proxy-connect-timeout: "180"
-      nginx.ingress.kubernetes.io/proxy-read-timeout: "300"
-      nginx.ingress.kubernetes.io/proxy-send-timeout: "300"
-    tls:
-      - secretName: mlflow-tls
-        hosts:
-          - mlflow.tgu.ovh
+  # Probes
+  livenessProbe:
+    enabled: true
+    initialDelaySeconds: 30
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 3
+  
+  readinessProbe:
+    enabled: true
+    initialDelaySeconds: 10
+    periodSeconds: 5
+    timeoutSeconds: 3
+    failureThreshold: 3
+  
+  # Resources
+  resources:
+    limits:
+      cpu: 1000m
+      memory: 1Gi
+    requests:
+      cpu: 100m
+      memory: 256Mi
+  
+  # Node selector
+  nodeSelector: {}
+  
+  # Tolerations
+  tolerations: []
+  
+  # Affinity
+  affinity: {}
 
 # mysql:
 #   image:

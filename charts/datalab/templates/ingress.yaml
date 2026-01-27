@@ -34,7 +34,7 @@ spec:
             pathType: {{ .pathType }}
             backend:
               service:
-                name: lab-mlflow
+                name: {{ include "datalab.fullname" . }}-mlflow
                 port:
                   number: 5000
           {{- end }}

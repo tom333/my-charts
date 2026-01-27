@@ -1,0 +1,100 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "datalab.fullname" . }}-mlflow
+  labels:
+    {{- include "datalab.labels" . | nindent 4 }}
+    app.kubernetes.io/component: mlflow
+spec:
+  replicas: {{ .Values.mlflow.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "datalab.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/component: mlflow
+  template:
+    metadata:
+      annotations:
+        checksum/secret: {{ include (print $.Template.BasePath "/mlflow-secret.yaml") . | sha256sum }}
+      labels:
+        {{- include "datalab.selectorLabels" . | nindent 8 }}
+        app.kubernetes.io/component: mlflow
+    spec:
+      {{- with .Values.mlflow.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+      - name: mlflow
+        image: "{{ .Values.mlflow.image.repository }}:{{ .Values.mlflow.image.tag }}"
+        imagePullPolicy: {{ .Values.mlflow.image.pullPolicy }}
+        ports:
+        - name: http
+          containerPort: 5000
+          protocol: TCP
+        env:
+        - name: MLFLOW_S3_ENDPOINT_URL
+          value: "http://{{ include "datalab.fullname" . }}-rustfs:9000"
+        - name: AWS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              name: {{ include "datalab.fullname" . }}-mlflow-secret
+              key: aws-access-key-id
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: {{ include "datalab.fullname" . }}-mlflow-secret
+              key: aws-secret-access-key
+        - name: AWS_DEFAULT_REGION
+          value: {{ .Values.mlflow.s3.region | quote }}
+        {{- with .Values.mlflow.extraEnvs }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+        command:
+        - mlflow
+        - server
+        - --backend-store-uri
+        - {{ .Values.mlflow.backendStore.uri | quote }}
+        - --artifacts-destination
+        - {{ .Values.mlflow.artifactsDestination | quote }}
+        - --serve-artifacts
+        - --host
+        - "0.0.0.0"
+        - --port
+        - "5000"
+        {{- with .Values.mlflow.extraArgs }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+        {{- if .Values.mlflow.livenessProbe.enabled }}
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: http
+          initialDelaySeconds: {{ .Values.mlflow.livenessProbe.initialDelaySeconds }}
+          periodSeconds: {{ .Values.mlflow.livenessProbe.periodSeconds }}
+          timeoutSeconds: {{ .Values.mlflow.livenessProbe.timeoutSeconds }}
+          failureThreshold: {{ .Values.mlflow.livenessProbe.failureThreshold }}
+        {{- end }}
+        {{- if .Values.mlflow.readinessProbe.enabled }}
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: http
+          initialDelaySeconds: {{ .Values.mlflow.readinessProbe.initialDelaySeconds }}
+          periodSeconds: {{ .Values.mlflow.readinessProbe.periodSeconds }}
+          timeoutSeconds: {{ .Values.mlflow.readinessProbe.timeoutSeconds }}
+          failureThreshold: {{ .Values.mlflow.readinessProbe.failureThreshold }}
+        {{- end }}
+        resources:
+          {{- toYaml .Values.mlflow.resources | nindent 10 }}
+      {{- with .Values.mlflow.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.mlflow.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.mlflow.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
