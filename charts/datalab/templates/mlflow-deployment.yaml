@@ -61,6 +61,10 @@ spec:
         - "0.0.0.0"
         - --port
         - "5000"
+        {{- if .Values.mlflow.allowedHosts }}
+        - --host-origins
+        - {{ .Values.mlflow.allowedHosts | quote }}
+        {{- end }}
         {{- with .Values.mlflow.extraArgs }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
