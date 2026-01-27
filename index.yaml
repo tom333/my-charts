@@ -3,6 +3,23 @@ entries:
   code-server:
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2026-01-27T02:51:07.288419469Z"
+    dependencies:
+    - name: qdrant
+      repository: https://qdrant.github.io/qdrant-helm
+      version: 1.16.3
+    - name: ollama
+      repository: https://otwld.github.io/ollama-helm
+      version: 1.39.0
+    description: A Helm chart for deploying code-server, qdrant, and ollama
+    digest: c3397bbdd9b9ec907e0393d689cbe1edf59c4f2badb30185b095a6528d369272
+    name: code-server
+    type: application
+    urls:
+    - https://github.com/tom333/my-charts/releases/download/code-server-0.11.1/code-server-0.11.1.tgz
+    version: 0.11.1
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2026-01-26T16:52:47.167737643Z"
     dependencies:
     - name: qdrant
@@ -155,6 +172,23 @@ entries:
     - https://github.com/tom333/my-charts/releases/download/code-server-0.1.1/code-server-0.1.1.tgz
     version: 0.1.1
   datalab:
+  - apiVersion: v2
+    created: "2026-01-27T02:51:07.483052233Z"
+    dependencies:
+    - name: mlflow
+      repository: oci://ghcr.io/deliveryhero/helm-charts
+      version: 1.0.10
+    - name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 16.7.27
+    - name: rustfs
+      repository: https://charts.rustfs.com/
+      version: 0.0.81
+    digest: e010d08ac0e6bd2f931589e3c72191912a4a775ea327fbd47d6b86c1fb1df780
+    name: datalab
+    urls:
+    - https://github.com/tom333/my-charts/releases/download/datalab-1.5.1/datalab-1.5.1.tgz
+    version: 1.5.1
   - apiVersion: v2
     created: "2026-01-25T07:58:17.716110854Z"
     dependencies:
@@ -1455,4 +1489,4 @@ entries:
     urls:
     - https://github.com/tom333/my-charts/releases/download/jupyter-0.1.0/jupyter-0.1.0.tgz
     version: 0.1.0
-generated: "2026-01-26T16:52:47.167925666Z"
+generated: "2026-01-27T02:51:07.483293923Z"
