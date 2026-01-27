@@ -2,7 +2,7 @@ apiVersion: v2
 name: code-server
 description: A Helm chart for deploying code-server, qdrant, and ollama
 type: application
-version: 0.11.0
+version: 0.11.1
 appVersion: "1.0.0"
 dependencies:
   # - name: code-server
