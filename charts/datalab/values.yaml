@@ -11,6 +11,12 @@ postgresql:
     persistence:
       enabled: true
       size: 10Gi
+    # Créer une base de données supplémentaire pour MLflow
+    initdb:
+      scripts:
+        00_init_database.sql: |
+          CREATE USER mlflow WITH PASSWORD 'mlflow';
+          CREATE DATABASE mlflow OWNER mlflow;
 
 # RustFS S3 storage configuration (standalone mode)
 rustfs:
@@ -56,11 +62,11 @@ mlflow:
   # PostgreSQL backend configuration
   mlflow:
     database:
-      hostname: "datalab-postgresql"
+      hostname: "lab-postgresql"
       port: 5432
-      name: "ducklake"
-      username: "ducklake"
-      password: "ducklake"
+      name: "mlflow"
+      username: "mlflow"
+      password: "mlflow"
     
     # S3 artifact store with RustFS
     s3:
@@ -85,7 +91,7 @@ mlflow:
   
   # Ingress configuration
   ingress:
-    enabled: true
+    enabled: false
     path: /
     hosts:
       - mlflow.tgu.ovh
@@ -122,25 +128,25 @@ mlflow:
 #         enabled: true
 #         secretName: zenml-tls-certs
 
-# # Custom Ingress for MLflow with TLS support
-# ingress:
-#   enabled: true
-#   className: "nginx"
-#   annotations:
-#     cert-manager.io/cluster-issuer: "letsencrypt-prod"
-#     nginx.ingress.kubernetes.io/proxy-body-size: 512m
-#     nginx.ingress.kubernetes.io/proxy-connect-timeout: "180"
-#     nginx.ingress.kubernetes.io/proxy-read-timeout: "300"
-#     nginx.ingress.kubernetes.io/proxy-send-timeout: "300"
-#   hosts:
-#     - host: mlflow.tgu.ovh
-#       paths:
-#         - path: /
-#           pathType: Prefix
-#   tls:
-#     - secretName: mlflow-tls
-#       hosts:
-#         - mlflow.tgu.ovh
+# Custom Ingress for MLflow with TLS support
+ingress:
+  enabled: true
+  className: "nginx"
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/proxy-body-size: "512m"
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "180"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "300"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "300"
+  hosts:
+    - host: mlflow.tgu.ovh
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - secretName: mlflow-tls
+      hosts:
+        - mlflow.tgu.ovh
 
 # # Persistence configuration
 # persistence:
