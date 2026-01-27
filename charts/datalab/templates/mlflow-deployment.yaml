@@ -33,7 +33,7 @@ spec:
           protocol: TCP
         env:
         - name: MLFLOW_S3_ENDPOINT_URL
-          value: "http://{{ include "datalab.fullname" . }}-rustfs:9000"
+          value: "http://{{ .Release.Name }}-rustfs-svc:9000"
         - name: AWS_ACCESS_KEY_ID
           valueFrom:
             secretKeyRef:
