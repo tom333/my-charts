@@ -63,8 +63,8 @@ mlflow:
   # Vous devez construire une image personnalisée avec psycopg2-binary installé.
   # Voir charts/datalab/docker/README.md pour les instructions.
   image:
-    repository: ghcr.io/mlflow/mlflow
-    tag: v2.18.0
+    repository: ghcr.io/tom333/mlflow-postgresql
+    tag: latest
     pullPolicy: IfNotPresent
   
   imagePullSecrets: []
