@@ -82,8 +82,9 @@ mlflow:
     accessKeyId: "rustfsadmin"
     secretAccessKey: "rustfsadmin"
   
-  # Hosts autorisés pour éviter les erreurs "Invalid Host header"
+  # Hosts autorisés pour éviter les erreurs "Invalid Host header" (MLflow 3.5.0+)
   # Mettre le domaine configuré dans ingress.hosts (ou "*" pour tout autoriser)
+  # Exemples: "mlflow.tgu.ovh" ou "mlflow.tgu.ovh,localhost"
   allowedHosts: "mlflow.tgu.ovh"
   
   # Variables d'environnement supplémentaires

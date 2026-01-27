@@ -62,7 +62,7 @@ spec:
         - --port
         - "5000"
         {{- if .Values.mlflow.allowedHosts }}
-        - --host-origins
+        - --allowed-hosts
         - {{ .Values.mlflow.allowedHosts | quote }}
         {{- end }}
         {{- with .Values.mlflow.extraArgs }}
