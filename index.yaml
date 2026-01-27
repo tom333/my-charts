@@ -173,6 +173,23 @@ entries:
     version: 0.1.1
   datalab:
   - apiVersion: v2
+    created: "2026-01-27T04:18:48.048774771Z"
+    dependencies:
+    - name: mlflow
+      repository: oci://ghcr.io/deliveryhero/helm-charts
+      version: 1.0.10
+    - name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 16.7.27
+    - name: rustfs
+      repository: https://charts.rustfs.com/
+      version: 0.0.81
+    digest: c4f272f9ffbe1ff2369d8c2eb047480339df3c8e7c4f3928cfc24b8e844d5ba4
+    name: datalab
+    urls:
+    - https://github.com/tom333/my-charts/releases/download/datalab-1.5.3/datalab-1.5.3.tgz
+    version: 1.5.3
+  - apiVersion: v2
     created: "2026-01-27T03:46:25.015075817Z"
     dependencies:
     - name: mlflow
@@ -1506,4 +1523,4 @@ entries:
     urls:
     - https://github.com/tom333/my-charts/releases/download/jupyter-0.1.0/jupyter-0.1.0.tgz
     version: 0.1.0
-generated: "2026-01-27T03:46:25.01530865Z"
+generated: "2026-01-27T04:18:48.048947744Z"
