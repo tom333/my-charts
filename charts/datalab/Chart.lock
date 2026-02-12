@@ -1,9 +1,9 @@
 dependencies:
 - name: postgresql
   repository: https://charts.bitnami.com/bitnami
-  version: 16.7.27
+  version: 18.3.0
 - name: rustfs
   repository: https://charts.rustfs.com/
   version: 0.0.83
-digest: sha256:dca2e252699b0ed325da1e010fc6d07815f40221fb758fd2ccbf37c9f0102961
-generated: "2026-02-11T15:03:17.648956252Z"
+digest: sha256:297bf4af07918ed08d1d0387e92f15064733d601ebf4fd7eb62b923b3879ac3d
+generated: "2026-02-12T16:35:17.412722254Z"
