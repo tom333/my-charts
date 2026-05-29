@@ -4,6 +4,6 @@ dependencies:
   version: 16.7.27
 - name: rustfs
   repository: https://charts.rustfs.com/
-  version: 0.5.0
-digest: sha256:584e9270fc32701cb4992ebd6ec674f7b5effb0407fd48cee583cf814dd55267
-generated: "2026-05-27T04:57:19.366199091Z"
+  version: 0.6.0
+digest: sha256:23accdc3e4e0bdcd4f04b6f988b8b6130c2c2ff014e3b8795e7559c03bae2658
+generated: "2026-05-29T18:25:56.230852986Z"
