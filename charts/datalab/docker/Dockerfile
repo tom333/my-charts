@@ -1,4 +1,4 @@
-ARG MLFLOW_VERSION=v3.16.1
+ARG MLFLOW_VERSION=v3.17.0
 
 FROM ghcr.io/mlflow/mlflow:${MLFLOW_VERSION}
 
